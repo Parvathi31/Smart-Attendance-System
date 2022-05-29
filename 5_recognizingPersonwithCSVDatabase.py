@@ -101,6 +101,9 @@ while True:
     key = cv2.waitKey(1) & 0xFF
     if key == 27:
         break
+    if proba*100 > 95:
+        print("The person is "+name)
+        break
 
 cam.release()
 cv2.destroyAllWindows()
