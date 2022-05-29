@@ -82,7 +82,6 @@ while True:
                         person = str(row)
                         print(name)
                 listString = str(box)
-                print(box)
                 if name in listString:
                     singleList = list(flatten(box))
                     listlen = len(singleList)
@@ -102,6 +101,10 @@ while True:
     if key == 27:
         break
     if proba*100 > 95:
+        f = open('result.csv','w')
+        f.write(name+'\n') #Give your csv text here.
+        ## Python will convert \n to os.linesep
+        f.close()
         print("The person is "+name)
         break
 
