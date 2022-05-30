@@ -5,6 +5,7 @@ import pickle
 import time
 import cv2
 import csv
+import os
 
 
 def flatten(lis):
@@ -39,6 +40,10 @@ box = []
 print("[INFO] starting video stream...")
 cam = cv2.VideoCapture(0)
 time.sleep(2.0)
+
+if os.stat("result.csv").st_size != 0:
+        f = open('result.csv', 'r+')
+        f.truncate(0)
 
 while True:
     _, frame = cam.read()
@@ -101,6 +106,8 @@ while True:
     key = cv2.waitKey(1) & 0xFF
     if key == 27:
         break
+    
+
     if proba*100 > 95:
         print(name)
         if name not in students:
