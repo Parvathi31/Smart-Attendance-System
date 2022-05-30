@@ -16,6 +16,7 @@ def flatten(lis):
             yield item
 
 
+students=[]
 embeddingFile = "output/embeddings.pickle"
 embeddingModel = "openface_nn4.small2.v1.t7"
 recognizerFile = "output/recognizer.pickle"
@@ -80,16 +81,16 @@ while True:
                     name = str(name)
                     if name in row:
                         person = str(row)
-                        print(name)
+                        #print(name)
                 listString = str(box)
-                #print(box)
+
                 if name in listString:
                     singleList = list(flatten(box))
                     listlen = len(singleList)
                     Index = singleList.index(name)
                     name = singleList[Index]
                     Roll_Number = singleList[Index + 1]
-                    print(Roll_Number)
+                    #print(Roll_Number)
 
             text = "{} : {} : {:.2f}%".format(name, Roll_Number, proba * 100)
             y = startY - 10 if startY - 10 > 10 else startY + 10
@@ -101,6 +102,15 @@ while True:
     key = cv2.waitKey(1) & 0xFF
     if key == 27:
         break
+    if proba*100 > 95:
+        print(name)
+        if name not in students:
+            students.append(name)
+            f = open('result.csv','a')
+            f.write(name+'\n') #Give your csv text here.
+            ## Python will convert \n to os.linesep
+            f.close()
+        print("The person is "+name)
 
 cam.release()
 cv2.destroyAllWindows()
