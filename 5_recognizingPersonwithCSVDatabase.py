@@ -82,7 +82,7 @@ while True:
                         person = str(row)
                         print(name)
                 listString = str(box)
-                print(box)
+                #print(box)
                 if name in listString:
                     singleList = list(flatten(box))
                     listlen = len(singleList)
